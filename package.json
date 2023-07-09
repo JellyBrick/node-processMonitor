@@ -1,6 +1,6 @@
 {
   "name": "@jellybrick/wql-process-monitor",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Monitor Windows process creation/deletion events via WMI (WQL)",
   "type": "module",
   "main": "./lib/processMonitor.cjs",
