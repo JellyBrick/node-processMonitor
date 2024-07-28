@@ -44,7 +44,7 @@
   "homepage": "https://github.com/xan105/node-processMonitor#readme",
   "dependencies": {
     "emittery": "^0.13.1",
-    "@alexssmusica/ffi-napi": "^4.0.16"
+    "@alexssmusica/ffi-napi": "^4.0.18"
   },
   "devDependencies": {
     "eslint": "^8.44.0",
