@@ -22,11 +22,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+import { EventEmitter } from "node:events";
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-
-import Emittery from "emittery";
 
 import { Failure } from "./error.js";
 
@@ -43,7 +42,10 @@ export type ProcessMonitorEvents = {
   deletion: [process: string, pid: string];
 };
 
-export type ProcessMonitorEmitter = Emittery<ProcessMonitorEvents>;
+export type ProcessMonitorEmitter = EventEmitter<{
+  creation: [ProcessMonitorEvents["creation"]];
+  deletion: [ProcessMonitorEvents["deletion"]];
+}>;
 
 export interface SubscribeOptions {
   /**
@@ -144,13 +146,13 @@ function load(): { lib: NativeAddon; emitter: ProcessMonitorEmitter } {
   const require = createRequire(import.meta.url);
   const lib = require(file) as NativeAddon;
 
-  const emitter: ProcessMonitorEmitter = new Emittery();
+  const emitter: ProcessMonitorEmitter = new EventEmitter();
 
   lib.setCallback((event, process, pid, filepath) => {
     if (event === "creation") {
-      void emitter.emit("creation", [process, pid, filepath]);
+      emitter.emit("creation", [process, pid, filepath]);
     } else if (event === "deletion") {
-      void emitter.emit("deletion", [process, pid]);
+      emitter.emit("deletion", [process, pid]);
     } else {
       throw new Failure(`Unknow event "${event}"`, "ERR_UNEXPECTED_EVENT");
     }
@@ -281,7 +283,7 @@ export function subscribe(option: SubscribeOptions = {}): ProcessMonitorEmitter 
     );
   } catch (err) {
     throw new Failure((err as Error).message || "Unknown error", "ERR_WQL_QUERY_FAIL");
-  }
+  } 
 
   return emitter;
 }

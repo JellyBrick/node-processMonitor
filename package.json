@@ -1,6 +1,6 @@
 {
   "name": "@jellybrick/wql-process-monitor",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Monitor Windows process creation/deletion events via WMI (WQL)",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -27,7 +27,7 @@
     "arm64"
   ],
   "engines": {
-    "node": ">=12.22.0"
+    "node": "^14.18.0 || >=16.0.0"
   },
   "scripts": {
     "build": "tsdown",
@@ -64,9 +64,6 @@
     "url": "https://github.com/JellyBrick/node-processMonitor/issues"
   },
   "homepage": "https://github.com/JellyBrick/node-processMonitor#readme",
-  "dependencies": {
-    "emittery": "^0.13.1"
-  },
   "devDependencies": {
     "@types/node": "^26.1.0",
     "prettier": "3.0.0",
