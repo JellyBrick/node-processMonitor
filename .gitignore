@@ -1,5 +1,5 @@
 node_modules/
-lib/src/**/*.tlog/
-lib/src/**/*.log
+rust/target/
+dist/
 
 .idea

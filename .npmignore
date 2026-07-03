@@ -1,6 +1,10 @@
 .github/
-lib/src/
+.idea/
+rust/
+src/
 test/
 screenshot/
 .eslintrc.json
 .prettierrc.json
+tsconfig.json
+tsdown.config.ts

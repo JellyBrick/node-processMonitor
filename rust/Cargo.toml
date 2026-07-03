@@ -1,0 +1,37 @@
+[package]
+name = "wql-process-monitor"
+version = "2.0.0"
+edition = "2024"
+license = "MIT"
+description = "Monitor Windows process creation/deletion events via WMI (WQL) - Node.js N-API addon"
+repository = "https://github.com/JellyBrick/node-processMonitor"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = { version = "3.10.1", features = ["napi4"] }
+napi-derive = "3"
+thiserror = "2"
+
+[dependencies.windows]
+version = "0.62.2"
+features = [
+  "Win32_Foundation",
+  "Win32_Security",
+  "Win32_System_Com",
+  "Win32_System_Ole",
+  "Win32_System_Rpc",
+  "Win32_System_Threading",
+  "Win32_System_Variant",
+  "Win32_System_Wmi",
+]
+
+[build-dependencies]
+napi-build = "2"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+strip = "symbols"
